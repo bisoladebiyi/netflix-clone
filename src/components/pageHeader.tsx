@@ -1,54 +1,64 @@
 import styled from "styled-components"
-import React from "react";
+import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import MovieRows from "./movieRows";
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import InfoModals from "./infoModals";
 
-interface Props {
-    data: any,
-    forSection?: string
+
+interface VidProps{
+    url:string
 }
-const Video:React.FC = () => {
+interface InfoProps{
+    title: string
+    desc:string
+    set:React.Dispatch<React.SetStateAction<boolean>>
+}
+interface MainProps extends Omit<InfoProps, 'set'>, VidProps {
+    data: any
+    score:number 
+    year:number
+    text:string
+}
+export const Video:React.FC<VidProps> = ({url}) => {
     return (
 <Wrapper>
    
         <ReactPlayer playing={false}
         className="react-player"
-        loop={true}
         width='100%'
         height={'100%'}
         volume={1}
         muted={false}
-        url={"https://vimeo.com/663520150"} />
-        
-        
+        url={url} />
         <BottomFade></BottomFade>
     </Wrapper>
     )
 }
-const MovieInfo:React.FC = () => {
+const MovieInfo:React.FC<InfoProps> = ({ title, desc, set}) => {
     return (
         <Info>
-            <p>All of us are <br/>dead</p>
-            <p className="desc">A high school becomes ground zero for a zombie virus outbreak. Trapped students must fight their way out — or turn into one of the rabid infected.</p>
+            <p>{title}</p>
+            <p className="desc">{desc}</p>
             <div>
             
-                <Button> <PlayArrowRoundedIcon className="icon" />Play</Button>
-                <Button id="info"><InfoOutlinedIcon className="icon"/>More Info</Button>
+                <Button onClick={() => alert("Well this is awkward 😅")}><PlayArrowRoundedIcon className="icon" />Play</Button>
+                <Button onClick={() => set(true)} id="info"><InfoOutlinedIcon className="icon"/>More Info</Button>
             </div>
         </Info>
     )
 }
-const PageHeader:React.FC<Props> = ({ data, forSection }) => {
+const PageHeader:React.FC<MainProps> = ({ data, title, desc, url, score, year, text }) => {
+    const [showModal, setShowModal] = useState<boolean>(false)
   return (
     <Header>
-        <Video />
+        <Video url={url} />
         <div className="movieRow">
-        <MovieRows data={data} title={"TV Shows"} />
+        <MovieRows data={data} title={text} />
         </div>
-        <MovieInfo />
-       
+        <MovieInfo title={title} set={setShowModal} desc={desc} />
+       {showModal && <InfoModals year={year} score={score} titleText={title} desc={desc} movUrl={url} set={setShowModal} />}
         
     </Header>
   );
@@ -70,12 +80,12 @@ const Header = styled.header`
 position: relative;
 .movieRow{
  position: relative;
- margin-top: -160px;
+ margin-top: -50px;
 z-index: 10;
 }
 
 `
-const BottomFade = styled.div`
+export const BottomFade = styled.div`
 height: 10rem;
 background: linear-gradient(180deg, transparent, rgba(15,15,15,0.61), #141414, #141414);
 position: absolute;
@@ -87,7 +97,7 @@ const Info = styled.div`
 width: 40%;
 padding-left:50px;
 position: absolute;
-z-index: 10;
+z-index: 5;
 left:0;
 top:30%;
 p{
@@ -109,7 +119,7 @@ div{
 }
 
 `
-const Button = styled.button`
+export const Button = styled.button`
 all:unset;
 cursor:pointer;
 display:flex;

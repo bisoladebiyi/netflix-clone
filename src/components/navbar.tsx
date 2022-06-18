@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import logo from "../../public/netflix-logo.png";
+import logo from "../assets/images/netflix-logo.png";
 import styled from "styled-components";
 import Link from "next/link";
 interface Props {
@@ -13,7 +13,7 @@ const Navbar: React.FC<Props> = ({ activePage }) => {
   },
   {
     name:'TV Shows',
-    link:'/'
+    link:'/tv-shows'
 },
 {
     name:'Movies',

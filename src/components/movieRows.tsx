@@ -1,36 +1,40 @@
 /* eslint-disable @next/next/no-img-element */
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-// import Slider from 'react-slick'
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
-// Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { A11y, Navigation, Pagination, Scrollbar } from 'swiper';
-
+import InfoModals from './infoModals';
+import { PopUpProps } from '../../utils/interfaces';
 
 
 interface Props{
     data: any
     title:string
+}
+  interface StateProp extends Omit<PopUpProps, 'set'>{
+    set?:React.Dispatch<React.SetStateAction<boolean>>
   }
 const MovieRows: React.FC<Props> = ({ data, title }) => {
-    const MovieBox = ({ backdrop_path }: any) => {
+  const [popUpData, setPopUpData] = useState<StateProp>({url: "", titleText: "", desc: "", year:"", score: 0})
+  const [showModal, setShowModal] = useState<boolean>(false)
+    const MovieBox = ({mov}:any) => {
         return (
-            <MovieBoxStyle>
-                <img src={`https://image.tmdb.org/t/p/w500/${backdrop_path}`} key={backdrop_path} alt={"poster"} />
-                <p>hello</p>
+            <MovieBoxStyle onClick={() => {
+             
+              console.log(mov)
+              setPopUpData({url:mov.backdrop_path, titleText:mov.original_title ? mov.original_title : mov.original_name , desc:mov.overview, year:mov.release_date ? mov.release_date.slice(0, 4) : null, score:mov?.vote_average})
+              setShowModal(!showModal)
+            }}>
+                <img src={mov.backdrop_path !== null ? `https://image.tmdb.org/t/p/w500/${mov.backdrop_path}` : '/fallback.jpeg'} alt={"poster"} />
             </MovieBoxStyle>
         )
     }
   return (
-    <div style={{marginBottom: '60px'}}>
+    <div style={{marginBottom: '90px'}}>
         <Title>{title}</Title>
         <Swiper slidesPerView={5}
         slidesPerGroup={5}
@@ -44,11 +48,11 @@ const MovieRows: React.FC<Props> = ({ data, title }) => {
         keyboard={{
           enabled: true,
         }}>
-        {data && data.map(({ backdrop_path}: any) => (
-         <SwiperSlide key={backdrop_path}><MovieBox backdrop_path={backdrop_path} /></SwiperSlide>
+        {data && data?.map((mov: any, index:number) => (
+         <SwiperSlide key={index}><MovieBox mov={mov} /></SwiperSlide>
         ))}
         </Swiper>
-     
+     {showModal && <InfoModals set={setShowModal} year={popUpData.year} score={popUpData.score} url={popUpData.url} titleText={popUpData.titleText} desc={popUpData.desc} />}
      </div>
   )
 }
@@ -56,10 +60,6 @@ const MovieRows: React.FC<Props> = ({ data, title }) => {
 export default MovieRows
 
 const MovieBoxStyle = styled.div`
-p{
-  display:none;
-  
-};
 img{
     width:100%;
     
