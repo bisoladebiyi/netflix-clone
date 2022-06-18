@@ -46,7 +46,9 @@ const NavbarContainer = styled.div`
 width:100%;
 display: flex;
 padding: 0px 48px;
+position: fixed;
 transition: background .4s ease-in-out;
+z-index:1000;
 
 `
 
