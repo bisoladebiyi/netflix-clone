@@ -5,6 +5,7 @@ export interface PopUpProps {
     year?: string | number 
     score?: string | number
     movUrl?:string
+    id?: number
     set:React.Dispatch<React.SetStateAction<boolean>>
 
 }

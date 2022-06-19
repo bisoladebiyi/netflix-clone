@@ -1,11 +1,10 @@
 import type { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 import { useEffect } from 'react'
-import { fetchData } from '../../utils/requests'
 import Layout from '../components/layout/layout'
 import MovieRows from '../components/movieRows'
 import { useSelector, useDispatch } from 'react-redux'
-import { getHeaderShows, getHomeSectionOne, getHomeSectionThree, getHomeSectionTwo } from '../redux/homepageSlice'
+import { getHeaderShows, getHomeSectionOne, getHomeSectionThree, getHomeSectionTwo } from '../redux/features/homepageSlice'
 
 interface Props{
   data:[any]
@@ -22,8 +21,6 @@ const Home: NextPage<Props>= () => {
       dispatch(getHomeSectionOne())
       dispatch(getHomeSectionTwo())
       dispatch(getHomeSectionThree())
-      console.log(sectionOne)
-   
     },[]) 
     const data = [
       {
@@ -52,29 +49,3 @@ const Home: NextPage<Props>= () => {
 }  
 
 export default Home
-
-// export async function getServerSideProps() {
-//   const key = process.env.API_KEY
-//   const nowplaying = await fetchData('https://api.themoviedb.org/3/movie/now_playing', key, 'GET')
-//   const popular = await fetchData('https://api.themoviedb.org/3/movie/popular', key, 'GET')
-//   const tvPopular = await fetchData('https://api.themoviedb.org/3/tv/popular', key, 'GET')
-
-//   return {
-//     props:{
-//       data: [
-//         {
-//           mainData: nowplaying.results,
-//           title: "Now Playing"
-//         },
-//         {
-//           mainData: popular.results,
-//           title: "Popular"
-//         },
-//         {
-//           mainData: tvPopular.results,
-//           title: "Popluar TV Dramas"
-//         }
-//       ],
-//     }
-//   }
-// }

@@ -3,14 +3,13 @@ import { NextPage } from "next";
 import dynamic from "next/dynamic";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchData } from "../../../utils/requests";
 import Layout from "../../components/layout/layout";
 import MovieRows from "../../components/movieRows";
 import {
   getMovieHeaderShows,
   getMovieSectionOne,
   getMovieSectionTwo,
-} from "../../redux/moviePageSlice";
+} from "../../redux/features/moviePageSlice";
 
 interface Props {
   data: [any];

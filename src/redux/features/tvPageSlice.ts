@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchData } from "../../utils/requests";
+import { fetchData } from "../../../utils/requests";
 
 
 

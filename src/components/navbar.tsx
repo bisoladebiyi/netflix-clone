@@ -1,12 +1,18 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import logo from "../assets/images/netflix-logo.png";
 import styled from "styled-components";
 import Link from "next/link";
+import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
+import avatar from '../assets/images/avatar.png'
+import { device } from "../styles/variables";
+import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
+import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
 interface Props {
     activePage: string 
 }
 const Navbar: React.FC<Props> = ({ activePage }) => {
+  const [showMobileLinks, setShowMobileLinks] = useState<boolean>(false)
   const navLinks = [{
       name:'Home',
       link:'/'
@@ -35,7 +41,23 @@ const Navbar: React.FC<Props> = ({ activePage }) => {
             <Link href={link} key={name}><li style={ activePage == name ? {fontWeight: '400'} : {}}>{name}</li></Link>
           ))}
         </ul>
+        <MobileLinksDropdown>
+          <p>{activePage}</p>
+          <button onClick={()=> setShowMobileLinks(!showMobileLinks)}>{!showMobileLinks ? <ArrowDropDownRoundedIcon /> : <ArrowDropUpRoundedIcon />}</button>
+          
+        </MobileLinksDropdown>
       </NavbarLogoLinks>
+      <div className="notifContainer">
+<NotificationsRoundedIcon className="notif" />
+<Image src={avatar} alt="avatar" width={30} height={30} className="avatar" />
+      </div>
+      {showMobileLinks && <MobileLinks>
+      <ul>
+          {navLinks.map(({name, link}) => (
+            <Link href={link} key={name}><li style={ activePage == name ? {fontWeight: '400'} : {}}>{name}</li></Link>
+          ))}
+        </ul>
+      </MobileLinks>}
     </NavbarContainer>
   );
 };
@@ -45,10 +67,32 @@ export default Navbar;
 const NavbarContainer = styled.div`
 width:100%;
 display: flex;
+justify-content: space-between;
+align-items:center;
 padding: 0px 48px;
 position: fixed;
 transition: background .4s ease-in-out;
-z-index:1000;
+z-index:6000;
+.notifContainer{
+  display: flex;
+  align-items:center;
+  .notif{
+    margin-right:10px;
+    @media ${device.mobileVL}{
+      transform: scale(.7);
+      margin-right:0;
+    }
+  }
+  .avatar{
+    border-radius:4px;
+    @media ${device.mobileVL}{
+      transform: scale(.7)
+    }
+  }
+}
+@media ${device.laptop}{
+  padding: 0px 20px 0 10px;
+}
 
 `
 
@@ -59,10 +103,22 @@ const NavbarLogoLinks = styled.div`
   align-items: center;
   .logo-img {
     width: 120px;
+    @media ${device.laptop}{
+      width:100px;
+    }
+    @media ${device.mobileVL}{
+      width:60px;
+    }
   }
   ul {
     display: flex;
     list-style: none;
+    @media ${device.laptop}{
+      font-size: 12px;
+    }
+    @media ${device.tablet}{
+      display:none;
+    }
     li {
       margin-right: 20px;
       cursor: pointer;
@@ -73,3 +129,39 @@ const NavbarLogoLinks = styled.div`
     }
   }
 `;
+
+const MobileLinksDropdown = styled.div`
+position:relative;
+display:none;
+align-items: center;
+font-size: 8px;
+margin-left:10px;
+font-weight:500;
+button{
+  all:unset;
+  cursor:pointer
+};
+@media ${device.tablet}{
+  display:flex;
+}
+`
+const MobileLinks = styled.div`
+position: absolute;
+left:0;
+top:100%;
+width: 230px;
+background: rgb(0,0,0, 0.92);
+text-align:center;
+font-size:14px;
+border-top:2px solid #ddd;
+font-weight:200;
+ul{
+  padding:0;
+  list-style:none;
+  li{
+    padding: 20px 0;
+    cursor:pointer;
+  }
+}
+
+`

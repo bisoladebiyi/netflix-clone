@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../components/layout/layout";
 import MovieRows from "../../components/movieRows";
-import { getTVHeaderShows, getTVSectionOne, getTVSectionTwo } from "../../redux/tvPageSlice";
+import { getTVHeaderShows, getTVSectionOne, getTVSectionTwo } from "../../redux/features/tvPageSlice";
 
 
 interface Props {
@@ -45,7 +45,7 @@ const TVShows: NextPage<Props> = () => {
           text="Top Rated TV Shows"
           score={6.7}
           data={headerShows}
-          url="https://vimeo.com/554682768"
+          url="https://vimeo.com/487524775"
           title="Money Heist"
           desc="Eight thieves take hostages and lock themselves in the Royal Mint of Spain as a criminal mastermind manipulates the police to carry out his plan."
         />
