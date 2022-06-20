@@ -1,10 +1,11 @@
 import type { NextPage } from 'next'
 import dynamic from 'next/dynamic'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Layout from '../components/layout/layout'
 import MovieRows from '../components/movieRows'
 import { useSelector, useDispatch } from 'react-redux'
 import { getHeaderShows, getHomeSectionOne, getHomeSectionThree, getHomeSectionTwo } from '../redux/features/homepageSlice'
+import Loader from '../components/loader'
 
 interface Props{
   data:[any]
@@ -12,6 +13,7 @@ interface Props{
 }
 const Home: NextPage<Props>= () => {
   const { headerShows, sectionOne, sectionTwo, sectionThree } = useSelector((store: any) => store.homePage)
+  const [loading, setLoading] = useState<boolean>(true)
   const PageHeader = dynamic(() => import("../components/pageHeader"), {
     ssr: false,
     });
@@ -22,6 +24,11 @@ const Home: NextPage<Props>= () => {
       dispatch(getHomeSectionTwo())
       dispatch(getHomeSectionThree())
     },[]) 
+    useEffect(()=> {
+      setTimeout(()=> {
+        setLoading(false)
+      }, 1000)
+    },[])
     const data = [
       {
         mainData: sectionOne,
@@ -43,6 +50,7 @@ const Home: NextPage<Props>= () => {
      {data.map(({ mainData, title }, index) => (
       <MovieRows data= {mainData} title={title} key={index} />
      ))}
+     {loading && <Loader />}
       </div>
     </Layout>
   ) 

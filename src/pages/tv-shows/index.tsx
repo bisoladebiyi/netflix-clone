@@ -1,9 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../components/layout/layout";
+import Loader from "../../components/loader";
 import MovieRows from "../../components/movieRows";
 import { getTVHeaderShows, getTVSectionOne, getTVSectionTwo } from "../../redux/features/tvPageSlice";
 
@@ -17,6 +18,7 @@ const TVShows: NextPage<Props> = () => {
     (store: any) => store.tvPage
   );
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState<boolean>(true)
   const PageHeader = dynamic(() => import("../../components/pageHeader"), {
     ssr: false,
   });
@@ -25,6 +27,11 @@ const TVShows: NextPage<Props> = () => {
     dispatch(getTVSectionOne());
     dispatch(getTVSectionTwo());
   }, []);
+  useEffect(()=> {
+    setTimeout(()=> {
+      setLoading(false)
+    }, 1000)
+  },[])
 
   const data = [
     {
@@ -52,6 +59,7 @@ const TVShows: NextPage<Props> = () => {
         {data?.map(({ mainData, title }, index) => (
           <MovieRows data={mainData} title={title} key={index} />
         ))}
+             {loading && <Loader />}
       </div>
     </Layout>
   );

@@ -76,7 +76,7 @@ padding: 0px 48px;
 position: fixed;
 transition: background .6s ease-in-out;
 background: ${props => props.id === "out" ? '#141414' : 'linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0))'};
-z-index:6000;
+z-index: 1000;
 .notifContainer{
   display: flex;
   align-items:center;

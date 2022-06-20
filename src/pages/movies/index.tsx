@@ -1,9 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../components/layout/layout";
+import Loader from "../../components/loader";
 import MovieRows from "../../components/movieRows";
 import {
   getMovieHeaderShows,
@@ -19,6 +20,7 @@ const Movies: NextPage<Props> = () => {
   const { headerShows, sectionOne, sectionTwo } = useSelector(
     (store: any) => store.moviePage
   );
+  const [loading, setLoading] = useState<boolean>(true)
   const dispatch = useDispatch();
   const PageHeader = dynamic(() => import("../../components/pageHeader"), {
     ssr: false,
@@ -28,7 +30,11 @@ const Movies: NextPage<Props> = () => {
     dispatch(getMovieSectionOne());
     dispatch(getMovieSectionTwo());
   }, []);
-
+  useEffect(()=> {
+    setTimeout(()=> {
+      setLoading(false)
+    }, 1000)
+  },[])
   const data = [
     {
       mainData: sectionOne,
@@ -39,7 +45,6 @@ const Movies: NextPage<Props> = () => {
       title: "Popular",
     },
   ];
-
   return (
     <Layout activePage="Movies">
       <div>
@@ -55,6 +60,7 @@ const Movies: NextPage<Props> = () => {
         {data?.map(({ mainData, title }, index) => (
           <MovieRows data={mainData} title={title} key={index} />
         ))}
+        {loading && <Loader />}
       </div>
     </Layout>
   );
