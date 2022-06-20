@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 export default MyApp
 const StyledComponent = styled.div`
-width:1280px;
+max-width:1280px;
 margin: 0 auto;
 overflow-x:hidden;
 `
