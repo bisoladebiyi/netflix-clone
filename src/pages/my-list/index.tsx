@@ -71,7 +71,7 @@ overflow:hidden;
 cursor: pointer;
 transition: all .3s ease-in-out;
 img{
-  border-radius:8px;
+  border-radius:6px;
     width:100%;
     
 };

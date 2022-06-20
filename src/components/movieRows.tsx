@@ -81,6 +81,7 @@ margin-bottom: 50px;
 export const MovieBoxStyle = styled.div`
 img{
     width:100%;
+    border-radius: 6px;
     
 };
 `

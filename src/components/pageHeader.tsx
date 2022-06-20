@@ -292,8 +292,9 @@ margin-right: 15px;
 cursor:pointer;
 background:none;
 color:#fff;
-display:grid;
-place-items:center;
+display: flex;
+align-items: center;
+justify-content: center;
 border: 1px solid #ddd;
 &:hover{
     border-color:  #fff;

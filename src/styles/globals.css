@@ -30,7 +30,6 @@ a {
 }
 .swiper-slide {
   overflow: hidden;
-  border-radius: 6px;
 margin-right: 7px;
 cursor: pointer;
 background:#141414;

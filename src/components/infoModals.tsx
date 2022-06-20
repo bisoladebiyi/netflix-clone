@@ -29,23 +29,18 @@ const InfoModals: React.FC<PopUpProps> = ({
     const [ added, setAdded ] = useState<boolean>(false)
 
     useEffect(()=> {
-        if(id && list){
-            list.some((item:any) => {
-                if(item.id === id){
-                    setAdded(true)
-                }else{
-                    setAdded(false)
-                }
-            })
+        let newArr = list.map((item: any) => item.id)
+        if(newArr.includes(id)){
+            setAdded(true)
+        }else{
+            setAdded(false)
         }
-       
-    },[list, id]) 
+    },[list]) 
     const handleList = () => {
         if(!added){
             dispatch(addToList(data))
         }else{
             dispatch(removeFromList({id})) 
-            setAdded(false)
         }
     }
   return (
@@ -62,7 +57,7 @@ const InfoModals: React.FC<PopUpProps> = ({
             <PlayArrowRoundedIcon className="icon" />
             Play
           </Button>
-          <CloseBtn id="add" onClick={handleList}>{!added ? <AddRoundedIcon className="iconClose" /> : <CheckRoundedIcon className="iconClose" />}</CloseBtn>
+          {!movUrl && <CloseBtn id="add" onClick={handleList}>{!added ? <AddRoundedIcon className="iconClose" /> : <CheckRoundedIcon className="iconClose" />}</CloseBtn>}
           </div>
           
         </div>

@@ -8,11 +8,14 @@ import avatar from '../assets/images/avatar.png'
 import { device } from "../styles/variables";
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
+import { useInView } from "react-intersection-observer";
 interface Props {
     activePage: string 
+    view: boolean
 }
-const Navbar: React.FC<Props> = ({ activePage }) => {
+const Navbar: React.FC<Props> = ({ activePage, view }) => {
   const [showMobileLinks, setShowMobileLinks] = useState<boolean>(false)
+
   const navLinks = [{
       name:'Home',
       link:'/'
@@ -31,7 +34,7 @@ const Navbar: React.FC<Props> = ({ activePage }) => {
 },
 ]
   return (
-    <NavbarContainer>
+    <NavbarContainer id={view ? "out" : "in"}>
       <NavbarLogoLinks>
         <div className="logo-img">
           <Image src={logo} alt="Netflix logo" />
@@ -71,7 +74,8 @@ justify-content: space-between;
 align-items:center;
 padding: 0px 48px;
 position: fixed;
-transition: background .4s ease-in-out;
+transition: background .6s ease-in-out;
+background: ${props => props.id === "out" ? '#141414' : 'linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0))'};
 z-index:6000;
 .notifContainer{
   display: flex;
