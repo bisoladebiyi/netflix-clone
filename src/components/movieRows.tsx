@@ -16,7 +16,7 @@ interface Props{
     data: any
     title:string
 }
-  interface StateProp extends Omit<PopUpProps, 'set'>{
+  export interface StateProp extends Omit<PopUpProps, 'set'>{
     set?:React.Dispatch<React.SetStateAction<boolean>>
   }
 const MovieRows: React.FC<Props> = ({ data, title }) => {
@@ -53,14 +53,10 @@ const MovieRows: React.FC<Props> = ({ data, title }) => {
             slidesPerView: 4,
             slidesPerGroup: 4
           },
-          500: {
+          0: {
             slidesPerGroup: 3,
             slidesPerView: 3
           },
-          0: {
-            slidesPerGroup: 2,
-            slidesPerView: 2
-          }
         }}
         keyboard={{
           enabled: true,
@@ -82,7 +78,7 @@ margin-bottom: 50px;
 }
 `
 
-const MovieBoxStyle = styled.div`
+export const MovieBoxStyle = styled.div`
 img{
     width:100%;
     

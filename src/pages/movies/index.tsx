@@ -61,24 +61,3 @@ const Movies: NextPage<Props> = () => {
 };
 
 export default Movies;
-// export async function getServerSideProps() {
-//     const key = process.env.API_KEY
-//     const nowplaying = await fetchData('', key, 'GET')
-//     const popular = await fetchData('', key, 'GET')
-//     const toprated = await fetchData('', key, 'GET')
-//     return {
-//       props:{
-//           data: [
-//             {
-//               mainData: nowplaying.results,
-//               title: "Now Playing"
-//             },
-//             {
-//               mainData: popular.results,
-//               title: "Popular"
-//             }
-//           ],
-//           topRated: toprated.results
-//         }
-//     }
-// }

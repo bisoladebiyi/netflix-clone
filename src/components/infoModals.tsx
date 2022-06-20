@@ -33,9 +33,7 @@ const InfoModals: React.FC<PopUpProps> = ({
             list.some((item:any) => {
                 if(item.id === id){
                     setAdded(true)
-                    // console.log("yeah")
                 }else{
-                    // console.log("no")
                     setAdded(false)
                 }
             })
@@ -165,8 +163,9 @@ border-radius: 50%;
 cursor:pointer;
 background:${props => props.id == "add" ? "rgba(0,0,0,0.49)": "#141414"};
 color:#fff;
-display:grid;
-place-items:center;
+display:flex;
+justify-content:center;
+align-items:center;
 position:${props => props.id == "add" ? "relative": "absolute"};
 top:${props => props.id == "add" ? "0": "10px"};
 right:10px;
