@@ -17,50 +17,63 @@ a {
 * {
   box-sizing: border-box;
 }
-.swiper{
+
+.swiper {
   overflow: visible !important;
 }
-.swiper-button-prev, .swiper-button-next {
+
+.swiper-button-prev,
+.swiper-button-next {
   color: #fff !important;
   transform: scale(0.5);
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
-.swiper-button-prev:hover, .swiper-button-next:hover{
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
   transform: scale(0.7);
 }
+
 .swiper-slide {
   overflow: hidden;
-margin-right: 7px;
-cursor: pointer;
-background:#141414;
+  margin-right: 7px;
+  cursor: pointer;
+  background: #141414;
   transition: all 450ms !important;
-
 }
+
 .swiper-wrapper:hover .swiper-slide {
   position: relative;
-  
 }
- .swiper-slide:hover{
+
+.swiper-slide:hover {
   z-index: 10000;
   transform: scale(1.3) !important;
-  box-shadow: -2px 0px 40px -21px rgba(0,0,0,0.8);
-  -webkit-box-shadow: -2px 0px 40px -21px rgba(0,0,0,0.8);
-  -moz-box-shadow: -2px 0px 40px -21px rgba(0,0,0,0.8);
+  box-shadow: -2px 0px 40px -21px rgba(0, 0, 0, 0.8);
+  -webkit-box-shadow: -2px 0px 40px -21px rgba(0, 0, 0, 0.8);
+  -moz-box-shadow: -2px 0px 40px -21px rgba(0, 0, 0, 0.8);
 }
-.swiper-slide:hover p{
+
+.swiper-slide:hover p {
   display: flex;
 }
-.swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction{
+
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal,
+.swiper-pagination-custom,
+.swiper-pagination-fraction {
   bottom: 100% !important;
-left: 0px !important;
+  left: 0px !important;
 }
-.swiper-pagination{
+
+.swiper-pagination {
   top: -30px !important;
-right: 10px !important;
-width: auto !important;
-text-align: right !important;
-height: auto !important;
+  right: 10px !important;
+  width: auto !important;
+  text-align: right !important;
+  height: auto !important;
 }
+
 .swiper-pagination-bullet {
   background-color: rgb(255, 255, 255) !important;
 }
