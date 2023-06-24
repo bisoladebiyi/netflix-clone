@@ -13,7 +13,7 @@ import {
 } from "../../redux/features/moviePageSlice";
 
 interface Props {
-  data: [any];
+  data: any[];
   topRated: any;
 }
 const Movies: NextPage<Props> = () => {
@@ -30,11 +30,13 @@ const Movies: NextPage<Props> = () => {
     dispatch(getMovieSectionOne());
     dispatch(getMovieSectionTwo());
   }, []);
+
   useEffect(()=> {
     setTimeout(()=> {
       setLoading(false)
     }, 1000)
   },[])
+  
   const data = [
     {
       mainData: sectionOne,

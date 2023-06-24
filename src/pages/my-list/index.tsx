@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { NextPage } from 'next'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import InfoModals from '../../components/infoModals'
@@ -12,6 +12,7 @@ const MyList: NextPage = () => {
   const { list } = useSelector((store: any) => store.myListPage)
   const [showInfoModal, setShowInfoModal] = useState<boolean>(false)
   const [mov, setMov] = useState<StateProp>({url: "", titleText: "", desc: "", year:"", score: 0, id:0})
+  
   return (
     <Layout activePage='My List'>
       <ListConatiner>

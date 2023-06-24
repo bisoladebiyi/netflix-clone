@@ -10,23 +10,26 @@ import { getTVHeaderShows, getTVSectionOne, getTVSectionTwo } from "../../redux/
 
 
 interface Props {
-  data: [any];
+  data: any[];
   topRated: any;
 }
 const TVShows: NextPage<Props> = () => {
   const { headerShows, sectionOne, sectionTwo } = useSelector(
     (store: any) => store.tvPage
   );
+
   const dispatch = useDispatch();
   const [loading, setLoading] = useState<boolean>(true)
   const PageHeader = dynamic(() => import("../../components/pageHeader"), {
     ssr: false,
   });
+
   useEffect(() => {
     dispatch(getTVHeaderShows());
     dispatch(getTVSectionOne());
     dispatch(getTVSectionTwo());
   }, []);
+
   useEffect(()=> {
     setTimeout(()=> {
       setLoading(false)
