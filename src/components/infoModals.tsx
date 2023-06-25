@@ -28,14 +28,14 @@ const InfoModals: React.FC<PopUpProps> = ({
   const [added, setAdded] = useState<boolean>(false);
 
   useEffect(() => {
-    let newArr = list.map((item: Omit<PopUpProps, "set"> ) => item.id);
+    let newArr = list.map((item: Omit<PopUpProps, "set">) => item.id);
     if (newArr.includes(id)) {
       setAdded(true);
     } else {
       setAdded(false);
     }
   }, [list, id]);
-  
+
   const handleList = () => {
     if (!added) {
       dispatch(addToList(data));
@@ -43,7 +43,7 @@ const InfoModals: React.FC<PopUpProps> = ({
       dispatch(removeFromList({ id }));
     }
   };
-  
+
   return (
     <Modal>
       <CloseBtn
@@ -93,7 +93,6 @@ const InfoModals: React.FC<PopUpProps> = ({
           </MoreInfo>
           <p className="desc">{desc}</p>
         </div>
-        {/* <img src={fall} alt="" /> */}
       </MovInfo>
     </Modal>
   );
@@ -115,18 +114,22 @@ const Modal = styled.div`
   background: #141414;
   z-index: 9000;
   overflow: hidden;
+
   @media ${device.laptop} {
     width: 80%;
   }
 `;
+
 const MovContainer = styled.div`
   position: relative;
   height: ${(props) => (props.id == "mov" ? "auto" : "400px")};
   background-size: cover;
   background-position: center;
+
   @media ${device.laptop} {
     height: ${(props) => (props.id == "mov" ? "auto" : "300px")};
   }
+
   @media ${device.mobileVL} {
     height: ${(props) => (props.id == "mov" ? "auto" : "250px")};
   }
@@ -136,46 +139,52 @@ const MovContainer = styled.div`
     top: 50%;
     padding-left: 50px;
     z-index: 999;
+
     @media ${device.mobileVL} {
       padding: 0 20px;
     }
+
     p {
       margin: 0;
       padding-bottom: 10px;
       font-size: 3.3rem;
       font-weight: 700;
       text-transform: uppercase;
+
       @media ${device.laptop} {
         font-size: 2.2rem;
       }
+
       @media ${device.mobileL} {
         font-size: 1.6rem;
       }
     }
+
     .btnContainer {
       display: flex;
       align-items: center;
     }
   }
 `;
+
 const MovInfo = styled.div`
   padding: 0 50px;
+
   .desc {
     font-size: 13px;
     font-weight: 200;
     line-height: 20px;
   }
+
   @media ${device.mobileVL} {
     padding: 0 20px;
     margin-top: -10px;
   }
 `;
+
 const CloseBtn = styled.button`
   width: 40px;
   height: 40px;
-  @media ${device.tablet} {
-    transform: scale(0.7);
-  }
   border-radius: 50%;
   cursor: pointer;
   background: ${(props) =>
@@ -189,12 +198,19 @@ const CloseBtn = styled.button`
   right: 10px;
   z-index: 10;
   border: ${(props) => (props.id == "add" ? "2px solid #ddd" : "none")};
+
+  @media ${device.tablet} {
+    transform: scale(0.7);
+  }
+
   &:hover {
     border-color: #fff;
   }
 `;
+
 const MoreInfo = styled.div`
   display: flex;
+
   p:first-child {
     font-weight: 600;
     color: #46d369;

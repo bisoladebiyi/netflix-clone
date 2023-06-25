@@ -1,17 +1,15 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA9ZmIzqy-s7sW-kEby07sIrsaCDCv13C8",
-  authDomain: "netflix-6595a.firebaseapp.com",
-  projectId: "netflix-6595a",
-  storageBucket: "netflix-6595a.appspot.com",
-  messagingSenderId: "608302218142",
-  appId: "1:608302218142:web:2c07e6c6350d2e0f06b48f",
-  measurementId: "G-6MWGYHJH1Z"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-// const analytics = getAnalytics(app);

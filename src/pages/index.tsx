@@ -12,21 +12,16 @@ import {
 } from "../redux/features/filmApiSlice";
 
 const Home: NextPage = () => {
-  const { data: headerShows } = useGetHeaderShowsQuery();
-  const { data: sectionOne } = useGetHomeSectionOneQuery();
-  const { data: sectionTwo } = useGetHomeSectionTwoQuery();
-  const { data: sectionThree } = useGetHomeSectionThreeQuery();
+  const { data: headerShows, isLoading: loading1 } = useGetHeaderShowsQuery();
+  const { data: sectionOne, isLoading: loading2 } = useGetHomeSectionOneQuery();
+  const { data: sectionTwo, isLoading: loading3 } = useGetHomeSectionTwoQuery();
+  const { data: sectionThree, isLoading: loading4 } =
+    useGetHomeSectionThreeQuery();
 
-  const [loading, setLoading] = useState<boolean>(true);
+  const loading = loading1 || loading2 || loading3 || loading4;
   const PageHeader = dynamic(() => import("../components/pageHeader"), {
     ssr: false,
   });
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
 
   const data = [
     {

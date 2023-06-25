@@ -1,22 +1,6 @@
-import axios from "axios"
-import { createUserWithEmailAndPassword, UserCredential, User, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, updateEmail } from "firebase/auth";
 import { auth } from "../src/firebase";
 import { IUser } from "./interfaces";
-
-
-export const fetchData = async (url: string, key: string | undefined, method: string) => {
-    const options = {
-        url: `${url}?api_key=${key}&language=en-US`,
-        method
-    }
-    try {
-        const { data } = await axios(options)
-        return data
-    } catch (err) {
-        throw err
-    }
-}
-
 
 // auth
 export const createUser = async (email: string, password: string) => {
@@ -37,4 +21,35 @@ export const logIn = async (email: string, password: string) => {
     }
 }
 
+export const logOut = async () => {
+    try {
+        await signOut(auth)
+    } catch (error) {
+        throw error
+    }
+}
 
+
+// profile update
+
+export const updateName = async (displayName: string) => {
+    try {
+        if (auth.currentUser) {
+            await updateProfile(auth?.currentUser, {
+                displayName
+            })
+        }
+    } catch (error) {
+        throw error
+    }
+}
+
+export const updateEmailAddress = async (email: string) => {
+    try {
+        if (auth.currentUser) {
+            await updateEmail(auth?.currentUser, email)
+        }
+    } catch (error) {
+        throw error
+    }
+}

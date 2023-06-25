@@ -5,10 +5,9 @@ import styled from "styled-components";
 import { createUser } from "../../../utils/requests";
 import AuthForm from "../../components/AuthForm";
 import Layout from "../../components/layout/layout";
+import { device } from "../../styles/variables";
 
 const SignUp = () => {
-  const [firstName, setFirstName] = useState<string>("");
-  const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -31,6 +30,7 @@ const SignUp = () => {
   const clearErrorMsg = () => {
     setErrorMsg("");
   };
+
   return (
     <Layout isAuth>
       <AuthWrapper>
@@ -43,10 +43,6 @@ const SignUp = () => {
             loading={loading}
             email={email}
             password={password}
-            firstName={firstName}
-            lastName={lastName}
-            setFirstName={setFirstName}
-            setLastName={setLastName}
             setEmail={setEmail}
             setPassword={setPassword}
             clearErrorMsg={clearErrorMsg}
@@ -79,6 +75,12 @@ export const Modal = styled.div`
   background-color: rgba(0, 0, 0, 0.75);
   border-radius: 4px;
   padding: 60px 68px;
+
+  @media ${device.mobileVL} {
+    width: 100%;
+    height: 100%;
+    padding: 50px 58px;
+  }
 
   .link {
     font-size: 13px;
