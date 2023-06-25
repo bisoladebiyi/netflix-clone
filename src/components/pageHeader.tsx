@@ -90,7 +90,9 @@ const PageHeader: React.FC<MainProps> = ({
         />
       )}
       <Control>
-          <MuteBtn onClick={()=> setIsMute(!isMute)}>{isMute ? <VolumeOffOutlinedIcon /> : <VolumeUpOutlinedIcon />}</MuteBtn>
+        <MuteBtn onClick={() => setIsMute(!isMute)}>
+          {isMute ? <VolumeOffOutlinedIcon /> : <VolumeUpOutlinedIcon />}
+        </MuteBtn>
         <div className="age">18+</div>
       </Control>
     </Header>
@@ -103,6 +105,7 @@ const Wrapper = styled.div`
   position: relative;
   z-index: 0;
   padding-top: 56.25%;
+
   .react-player {
     position: absolute;
     top: 0;
@@ -111,6 +114,7 @@ const Wrapper = styled.div`
 `;
 const Header = styled.header`
   position: relative;
+
   .movieRow {
     position: relative;
     margin-top: -50px;
@@ -138,6 +142,7 @@ const Info = styled.div`
   z-index: 5;
   left: 0;
   top: 30%;
+
   p {
     margin: 0;
     &:first-child {
@@ -146,6 +151,7 @@ const Info = styled.div`
       text-transform: uppercase;
     }
   }
+
   .desc {
     font-size: 1rem;
     line-height: 25px;
@@ -158,10 +164,12 @@ const Info = styled.div`
       margin-top: 10px;
     }
   }
+
   @media ${device.laptop} {
     padding-left: 20px;
     top: 25%;
     width: 45%;
+
     p {
       margin: 0;
       &:first-child {
@@ -170,14 +178,17 @@ const Info = styled.div`
         text-transform: uppercase;
       }
     }
+
     .desc {
       font-size: 0.8rem;
       line-height: 18px;
     }
   }
+
   @media ${device.tablet} {
     top: 20%;
     width: 50%;
+
     p {
       margin: 0;
       &:first-child {
@@ -186,27 +197,33 @@ const Info = styled.div`
         text-transform: uppercase;
       }
     }
+
     .desc {
       font-size: 12px;
       line-height: 18px;
     }
   }
+
   @media ${device.mobileVL} {
     top: 25%;
     width: 50%;
+
     p {
       &:first-child {
         font-size: 1.1rem;
       }
     }
+
     .desc {
       display: none;
     }
   }
+
   @media ${device.mobileL} {
     top: 15%;
   }
 `;
+
 export const Button = styled.button`
   all: unset;
   cursor: pointer;
@@ -220,15 +237,18 @@ export const Button = styled.button`
   font-size: 16px;
   padding: 10px 24px;
   margin-right: 20px;
+
   .icon {
     transform: ${(props) => (props.id == "info" ? "scale(1.2)" : "scale(1.7)")};
     margin-left: -5px;
     margin-right: 10px;
   }
+
   &:hover {
     background: ${(props) =>
       props.id == "info" ? "rgba(225,225,225,0.11)" : "rgba(225,225,225,0.99)"};
   }
+
   @media ${device.tablet} {
     padding: 5px 16px;
     .icon {
@@ -236,6 +256,7 @@ export const Button = styled.button`
     }
     font-size: 14px;
   }
+
   @media ${device.mobileVL} {
     padding: 5px 10px;
     margin-right: 10px;
@@ -245,6 +266,7 @@ export const Button = styled.button`
     }
     font-size: 10px;
   }
+
   @media ${device.mobileL} {
     padding: 1px 6px;
     .icon {
@@ -254,18 +276,22 @@ export const Button = styled.button`
     font-size: 5px;
   }
 `;
+
 const Control = styled.div`
   position: absolute;
   right: 0;
   bottom: 40%;
   display: flex;
   align-items: center;
+
   @media ${device.mobileVL} {
     bottom: 50%;
   }
+
   @media ${device.mobileL} {
     bottom: 60%;
   }
+
   .age {
     background: rgba(15, 15, 15, 0.61);
     border-left: 3px solid #ddd;
@@ -283,23 +309,25 @@ const Control = styled.div`
     }
   }
 `;
+
 const MuteBtn = styled.button`
-width: 40px;
-height:40px;
-@media ${device.tablet}{
-   transform: scale(.5);
-   margin-right: 0px;
-}
-border-radius: 50%;
-margin-right: 15px;
-cursor:pointer;
-background:none;
-color:#fff;
-display: flex;
-align-items: center;
-justify-content: center;
-border: 1px solid #ddd;
-&:hover{
-    border-color:  #fff;
-}
-`
+  width: 40px;
+  height: 40px;
+
+  @media ${device.tablet} {
+    transform: scale(0.5);
+    margin-right: 0px;
+  }
+  border-radius: 50%;
+  margin-right: 15px;
+  cursor: pointer;
+  background: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  &:hover {
+    border-color: #fff;
+  }
+`;

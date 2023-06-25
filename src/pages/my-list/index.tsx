@@ -82,9 +82,11 @@ const ListConatiner = styled.div`
     font-size: 14px;
     font-weight: 200;
   }
+
   @media ${device.laptop} {
     padding: 70px 20px 20px;
   }
+
   @media ${device.mobileVL} {
     padding-top: 40px;
     h2 {
@@ -95,25 +97,31 @@ const ListConatiner = styled.div`
     }
   }
 `;
+
 const ListGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 8px;
+
   @media ${device.laptop} {
     grid-template-columns: repeat(4, 1fr);
   }
+
   @media ${device.mobileVL} {
     grid-template-columns: repeat(3, 1fr);
   }
 `;
+
 export const MovieBoxStyle = styled.div`
   overflow: hidden;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+
   img {
     border-radius: 6px;
     width: 100%;
   }
+
   &:hover {
     transform: scale(1.3);
   }

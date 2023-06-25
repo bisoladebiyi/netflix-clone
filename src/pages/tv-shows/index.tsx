@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Layout from "../../components/layout/layout";
 import Loader from "../../components/loader";
 import MovieRows from "../../components/movieRows";
@@ -12,20 +12,14 @@ import {
 } from "../../redux/features/filmApiSlice";
 
 const TVShows: NextPage = () => {
-  const { data: headerShows } = useGetTVHeaderShowsQuery();
-  const { data: sectionOne } = useGetTVSectionOneQuery();
-  const { data: sectionTwo } = useGetTVSectionTwoQuery();
+  const { data: headerShows, isLoading: loading1 } = useGetTVHeaderShowsQuery();
+  const { data: sectionOne, isLoading: loading2 } = useGetTVSectionOneQuery();
+  const { data: sectionTwo, isLoading: loading3 } = useGetTVSectionTwoQuery();
 
-  const [loading, setLoading] = useState<boolean>(true);
+  const loading = loading1 || loading2 || loading3;
   const PageHeader = dynamic(() => import("../../components/pageHeader"), {
     ssr: false,
   });
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
 
   const data = [
     {

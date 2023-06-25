@@ -1,42 +1,22 @@
 import React from "react";
 import styled from "styled-components";
 import { IForm } from "../../utils/interfaces";
+import { device } from "../styles/variables";
 
 const AuthForm: React.FC<IForm> = ({
   authType,
   error,
   onClick,
   loading,
-  firstName,
-  lastName,
   email,
   password,
   setEmail,
   setPassword,
-  setFirstName,
-  setLastName,
   clearErrorMsg,
 }) => {
   return (
     <>
-      <Form action="" $authType={authType}>
-        {authType === "signup" && (
-          <>
-            <Input
-              placeholder="First name"
-              required
-              value={firstName}
-              onChange={(e) => setFirstName && setFirstName(e.target.value)}
-            />
-            <Input
-              placeholder="Last name"
-              required
-              value={lastName}
-              onChange={(e) => setLastName && setLastName(e.target.value)}
-            />
-          </>
-        )}
-
+      <Form action="">
         <Input
           placeholder="E-mail"
           type={"email"}
@@ -64,14 +44,14 @@ const AuthForm: React.FC<IForm> = ({
 
 export default AuthForm;
 
-const Form = styled.form<{ $authType: string }>`
-  height: ${(props) => (props.$authType === "signup" ? "320px" : "200px")};
+export const Form = styled.form`
+  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 `;
 
-const Input = styled.input<{ $error?: boolean }>`
+export const Input = styled.input<{ $error?: boolean }>`
   background-color: rgb(51, 51, 51);
   width: 100%;
   padding: 18px 20px 10px;
@@ -95,7 +75,7 @@ const Input = styled.input<{ $error?: boolean }>`
   }
 `;
 
-const Button = styled.button`
+export const Button = styled.button`
   background: #e50914;
   border: none;
   width: 100%;
@@ -106,6 +86,10 @@ const Button = styled.button`
   padding: 16px;
   color: #fff;
   cursor: pointer;
+
+  @media ${device.mobileVL} {
+    font-size: 14px;
+  }
 
   &:disabled {
     background: grey;

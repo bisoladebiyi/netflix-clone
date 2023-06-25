@@ -12,21 +12,18 @@ import {
 } from "../../redux/features/filmApiSlice";
 
 const Movies: NextPage = () => {
-  const { data: headerShows } = useGetMovieHeaderShowsQuery();
-  const { data: sectionOne } = useGetMovieSectionOneQuery();
-  const { data: sectionTwo } = useGetMovieSectionTwoQuery();
+  const { data: headerShows, isLoading: loading1 } =
+    useGetMovieHeaderShowsQuery();
+  const { data: sectionOne, isLoading: loading2 } =
+    useGetMovieSectionOneQuery();
+  const { data: sectionTwo, isLoading: loading3 } =
+    useGetMovieSectionTwoQuery();
 
-  const [loading, setLoading] = useState<boolean>(true);
+  const loading = loading1 || loading2 || loading3;
 
   const PageHeader = dynamic(() => import("../../components/pageHeader"), {
     ssr: false,
   });
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
 
   const data = [
     {

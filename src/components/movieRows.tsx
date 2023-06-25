@@ -18,6 +18,7 @@ interface Props {
 export interface StateProp extends Omit<PopUpProps, "set"> {
   set?: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
 const MovieRows: React.FC<Props> = ({ data, title }) => {
   const [popUpData, setPopUpData] = useState<StateProp>({
     url: "",
@@ -28,6 +29,7 @@ const MovieRows: React.FC<Props> = ({ data, title }) => {
     id: 0,
   });
   const [showModal, setShowModal] = useState<boolean>(false);
+
   const MovieBox = ({ mov }: any) => {
     return (
       <MovieBoxStyle
@@ -56,6 +58,7 @@ const MovieRows: React.FC<Props> = ({ data, title }) => {
       </MovieBoxStyle>
     );
   };
+
   return (
     <RowContainer>
       <Title>{title}</Title>
@@ -112,6 +115,7 @@ const MovieRows: React.FC<Props> = ({ data, title }) => {
 export default MovieRows;
 const RowContainer = styled.div`
   margin-bottom: 50px;
+
   @media ${device.mobileVL} {
     margin-bottom: 30px;
   }
@@ -128,9 +132,11 @@ const Title = styled.p`
   z-index: 10000;
   font-weight: 400;
   margin: 5px 60px 10px;
+
   @media ${device.laptop} {
     margin-left: 20px;
   }
+
   @media ${device.mobileVL} {
     font-size: 11px;
   }
