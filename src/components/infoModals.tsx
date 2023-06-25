@@ -35,7 +35,7 @@ const InfoModals: React.FC<PopUpProps> = ({
       setAdded(false);
     }
   }, [list, id]);
-
+  
   const handleList = () => {
     if (!added) {
       dispatch(addToList(data));
@@ -43,7 +43,7 @@ const InfoModals: React.FC<PopUpProps> = ({
       dispatch(removeFromList({ id }));
     }
   };
-
+  
   return (
     <Modal>
       <CloseBtn
@@ -100,6 +100,7 @@ const InfoModals: React.FC<PopUpProps> = ({
 };
 
 export default InfoModals;
+
 const Modal = styled.div`
   box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.663);
   width: 60%;

@@ -5,12 +5,14 @@ import Navbar from '../navbar'
 import styled from 'styled-components'
 
 interface Props {
-    children: JSX.Element,
-    activePage: string 
+    children: JSX.Element;
+    activePage?: string; 
+    isAuth?: boolean;
 }
-const Layout: React.FC<Props>= ({ children, activePage }) => {
+const Layout: React.FC<Props>= ({ children, activePage, isAuth }) => {
   const [ref, inView] = useInView();
   const [outOfView, setOutOfView] = useState<boolean>(false)
+  
   useEffect(()=> {
     if(!inView){
       setOutOfView(true)
@@ -18,11 +20,12 @@ const Layout: React.FC<Props>= ({ children, activePage }) => {
       setOutOfView(false)
     }
   },[inView])
+
   return (
     <>
     <Head><title>Netflix Clone - {activePage}</title></Head>
     <span ref={ref}></span>
-    <Navbar view={outOfView} activePage={activePage} />
+    <Navbar view={outOfView} activePage={activePage} isAuth={isAuth} />
     <StyledMainContent>
         {children}
     </StyledMainContent>
