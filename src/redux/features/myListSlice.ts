@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { IMyList, PopUpProps } from "../../../utils/interfaces"
 
-
-const initialState: any = {
+const initialState: IMyList = {
     list: []
 }
 
@@ -13,7 +13,7 @@ const myListSlice = createSlice({
             state.list = [...state.list, payload.payload]
         },
         removeFromList: (state, payload) => {
-            state.list = state.list.filter((item: any) => item.id !== payload.payload.id)
+            state.list = state.list.filter((item: Omit<PopUpProps, "set">) => item.id !== payload.payload.id)
         }
     }
 })

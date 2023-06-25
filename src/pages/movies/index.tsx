@@ -2,49 +2,40 @@
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../components/layout/layout";
 import Loader from "../../components/loader";
 import MovieRows from "../../components/movieRows";
 import {
-  getMovieHeaderShows,
-  getMovieSectionOne,
-  getMovieSectionTwo,
-} from "../../redux/features/moviePageSlice";
+  useGetMovieHeaderShowsQuery,
+  useGetMovieSectionOneQuery,
+  useGetMovieSectionTwoQuery,
+} from "../../redux/features/filmApiSlice";
 
-interface Props {
-  data: [any];
-  topRated: any;
-}
-const Movies: NextPage<Props> = () => {
-  const { headerShows, sectionOne, sectionTwo } = useSelector(
-    (store: any) => store.moviePage
-  );
-  const [loading, setLoading] = useState<boolean>(true)
-  const dispatch = useDispatch();
+const Movies: NextPage = () => {
+  const { data: headerShows, isLoading: loading1 } =
+    useGetMovieHeaderShowsQuery();
+  const { data: sectionOne, isLoading: loading2 } =
+    useGetMovieSectionOneQuery();
+  const { data: sectionTwo, isLoading: loading3 } =
+    useGetMovieSectionTwoQuery();
+
+  const loading = loading1 || loading2 || loading3;
+
   const PageHeader = dynamic(() => import("../../components/pageHeader"), {
     ssr: false,
   });
-  useEffect(() => {
-    dispatch(getMovieHeaderShows());
-    dispatch(getMovieSectionOne());
-    dispatch(getMovieSectionTwo());
-  }, []);
-  useEffect(()=> {
-    setTimeout(()=> {
-      setLoading(false)
-    }, 1000)
-  },[])
+
   const data = [
     {
-      mainData: sectionOne,
+      mainData: sectionOne?.results,
       title: "Now Playing",
     },
     {
-      mainData: sectionTwo,
+      mainData: sectionTwo?.results,
       title: "Popular",
     },
   ];
+
   return (
     <Layout activePage="Movies">
       <div>
@@ -52,7 +43,7 @@ const Movies: NextPage<Props> = () => {
           year={2021}
           text="Top Rated Movies"
           score={6.7}
-          data={headerShows}
+          data={headerShows?.results}
           url="https://vimeo.com/537102063"
           title="army of the dead"
           desc="After a zombie outbreak in Las Vegas, a group of mercenaries takes the ultimate gamble by venturing into the quarantine zone for the greatest heist ever."

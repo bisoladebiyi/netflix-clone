@@ -1,59 +1,61 @@
-import type { NextPage } from 'next'
-import dynamic from 'next/dynamic'
-import { useEffect, useState } from 'react'
-import Layout from '../components/layout/layout'
-import MovieRows from '../components/movieRows'
-import { useSelector, useDispatch } from 'react-redux'
-import { getHeaderShows, getHomeSectionOne, getHomeSectionThree, getHomeSectionTwo } from '../redux/features/homepageSlice'
-import Loader from '../components/loader'
+import type { NextPage } from "next";
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
+import Layout from "../components/layout/layout";
+import MovieRows from "../components/movieRows";
+import Loader from "../components/loader";
+import {
+  useGetHeaderShowsQuery,
+  useGetHomeSectionOneQuery,
+  useGetHomeSectionThreeQuery,
+  useGetHomeSectionTwoQuery,
+} from "../redux/features/filmApiSlice";
 
-interface Props{
-  data:[any]
-  tv:any
-}
-const Home: NextPage<Props>= () => {
-  const { headerShows, sectionOne, sectionTwo, sectionThree } = useSelector((store: any) => store.homePage)
-  const [loading, setLoading] = useState<boolean>(true)
+const Home: NextPage = () => {
+  const { data: headerShows, isLoading: loading1 } = useGetHeaderShowsQuery();
+  const { data: sectionOne, isLoading: loading2 } = useGetHomeSectionOneQuery();
+  const { data: sectionTwo, isLoading: loading3 } = useGetHomeSectionTwoQuery();
+  const { data: sectionThree, isLoading: loading4 } =
+    useGetHomeSectionThreeQuery();
+
+  const loading = loading1 || loading2 || loading3 || loading4;
   const PageHeader = dynamic(() => import("../components/pageHeader"), {
     ssr: false,
-    });
-    const dispatch = useDispatch()  
-    useEffect(()=> {
-      dispatch(getHeaderShows()) 
-      dispatch(getHomeSectionOne())
-      dispatch(getHomeSectionTwo())
-      dispatch(getHomeSectionThree())
-    },[]) 
-    useEffect(()=> {
-      setTimeout(()=> {
-        setLoading(false)
-      }, 1000)
-    },[])
-    const data = [
-      {
-        mainData: sectionOne,
-        title: "Now Playing"
-      },
-      {
-        mainData: sectionTwo,
-        title: "Popular"
-      },
-      {
-        mainData: sectionThree,
-        title: "Popluar TV Dramas"
-      }
-    ]
+  });
+
+  const data = [
+    {
+      mainData: sectionOne?.results,
+      title: "Now Playing",
+    },
+    {
+      mainData: sectionTwo?.results,
+      title: "Popular",
+    },
+    {
+      mainData: sectionThree?.results,
+      title: "Popluar TV Dramas",
+    },
+  ];
   return (
-    <Layout activePage='Home'>
-     <div>
-     <PageHeader text="TV Shows" year={2022} score={8.5} data={headerShows} url="https://vimeo.com/663520150" title="all of us are dead" desc='A high school becomes ground zero for a zombie virus outbreak. Trapped students must fight their way out — or turn into one of the rabid infected.' />
-     {data.map(({ mainData, title }, index) => (
-      <MovieRows data= {mainData} title={title} key={index} />
-     ))}
-     {loading && <Loader />}
+    <Layout activePage="Home">
+      <div>
+        <PageHeader
+          text="TV Shows"
+          year={2022}
+          score={8.5}
+          data={headerShows?.results}
+          url="https://vimeo.com/663520150"
+          title="all of us are dead"
+          desc="A high school becomes ground zero for a zombie virus outbreak. Trapped students must fight their way out — or turn into one of the rabid infected."
+        />
+        {data.map(({ mainData, title }, index) => (
+          <MovieRows data={mainData} title={title} key={index} />
+        ))}
+        {loading && <Loader />}
       </div>
     </Layout>
-  ) 
-}  
+  );
+};
 
-export default Home
+export default Home;
