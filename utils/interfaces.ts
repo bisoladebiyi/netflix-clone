@@ -10,9 +10,6 @@ export interface PopUpProps {
 
 }
 
-export interface StateTypes{
-    headerShows: any,
-    sectionOne: [any],
-    sectionTwo: [any],
-    sectionThree: [any]
+export interface IMyList {
+    list: Omit<PopUpProps, "set">[]
 }

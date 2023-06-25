@@ -24,6 +24,7 @@ interface MainProps extends Omit<InfoProps, "set">, VidProps {
   year: number;
   text: string;
 }
+
 export const Video: React.FC<VidProps> = ({ url, isMute }) => {
   return (
     <Wrapper>
@@ -40,6 +41,7 @@ export const Video: React.FC<VidProps> = ({ url, isMute }) => {
     </Wrapper>
   );
 };
+
 const MovieInfo: React.FC<InfoProps> = ({ title, desc, set }) => {
   return (
     <Info>
@@ -58,6 +60,7 @@ const MovieInfo: React.FC<InfoProps> = ({ title, desc, set }) => {
     </Info>
   );
 };
+
 const PageHeader: React.FC<MainProps> = ({
   data,
   title,
